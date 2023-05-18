@@ -1,44 +1,31 @@
-import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-function Movie() {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-  const getMoives = async () => {
-    const response = await fetch("https://yts.mx/api/v2/list_movies.json?minimum_rating=9.5&sort_by=year");
-    const json = await response.json();
-    setMovies(json.data.movies);
-    setLoading(false);
-  };
+// 홈에서 영화 클릭 시 url을 /movies.{movies.id} 로 하고 싶음.
 
-  useEffect(() => {
-    getMoives();
-  }, []);
-  console.log(movies);
+function Movie({ id, coverImg, title, summary, genres }) {
   return (
-    <>
-      <div>
-        {loading ? (
-          <h1>Loading...</h1>
-        ) : (
-          <div>
-            {movies.map((item) => (
-              <article key={item.id}>
-                <h2>{item.title}</h2>
-                <img src={item.medium_cover_image} />
-                <ul>
-                  {item.genres.map((g) => (
-                    <li key={g}>{g}</li>
-                  ))}
-                </ul>
-                <p>{item.year}</p>
-                <p>{item.summary}</p>
-              </article>
-            ))}
-          </div>
-        )}
-      </div>
-    </>
+    <article>
+      <img src={coverImg} alt="title" />
+      <h2>
+        <Link to={`/movie/${id}`}>{title}</Link>
+      </h2>
+      <p>{summary}</p>
+      <ul>
+        {genres.map((g) => (
+          <li key={g}>{g}</li>
+        ))}
+      </ul>
+    </article>
   );
 }
+
+// Movie.PropTypes = {
+//   id:Prop: PropTypes.number.isRequired,
+//   coverImg: PropTypes.string.isRequired,
+//   title: PropTypes.string.isRequired,
+//   summary: PropTypes.string.isRequired,
+//   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+// };
 
 export default Movie;

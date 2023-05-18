@@ -1,13 +1,13 @@
-import CoinTracker from "./CoinTracker";
-import Todo from "./Todo";
-import Movie from "./components/Movie";
+import CoinTracker from "./components/CoinTracker";
+import Todo from "./components/Todo";
+import AppMovie from "./components/AppMovie";
 
 function App() {
   return (
     <>
       {/* <Todo /> */}
       {/* <CoinTracker /> */}
-      <Movie />
+      <AppMovie />
     </>
   );
 }
