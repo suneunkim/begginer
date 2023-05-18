@@ -1,21 +1,25 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import styles from "./Movie.module.css";
 
-// 홈에서 영화 클릭 시 url을 /movies.{movies.id} 로 하고 싶음.
-
-function Movie({ id, coverImg, title, summary, genres }) {
+function Movie({ id, coverImg, title, year, summary, genres }) {
   return (
-    <article>
-      <img src={coverImg} alt="title" />
-      <h2>
-        <Link to={`/movie/${id}`}>{title}</Link>
-      </h2>
-      <p>{summary}</p>
-      <ul>
-        {genres.map((g) => (
-          <li key={g}>{g}</li>
-        ))}
-      </ul>
+    <article className={styles.movie}>
+      <div className={styles.movie__imgbox}>
+        <img src={coverImg} alt="title" className={styles.movie__img} />
+      </div>
+      <div>
+        <h2 className={styles.movie__title}>
+          <Link to={`/movie/${id}`}>{title}</Link>
+        </h2>
+        <h3 className={styles.movie__year}>{year}</h3>
+        <p>{summary.length > 400 ? `${summary.slice(0, 400)}...` : summary}</p>
+        <ul className={styles.movie__genres}>
+          {genres.map((g) => (
+            <li key={g}>{g}</li>
+          ))}
+        </ul>
+      </div>
     </article>
   );
 }

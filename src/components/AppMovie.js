@@ -7,7 +7,7 @@ function AppMovie() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/movie/:id" element={<Detail />} />
+        <Route path={`${process.env.PUBLIC_URL}/movie/:id`} element={<Detail />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </BrowserRouter>
